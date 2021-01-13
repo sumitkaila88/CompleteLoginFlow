@@ -1,0 +1,25 @@
+{
+  "name": "complete-login",
+  "version": "1.0.0",
+  "description": "React and Node Login with complete Authentication",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumitkaila88/CompleteLoginFlow.git"
+  },
+  "author": "Sumit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sumitkaila88/CompleteLoginFlow/issues"
+  },
+  "homepage": "https://github.com/sumitkaila88/CompleteLoginFlow#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
