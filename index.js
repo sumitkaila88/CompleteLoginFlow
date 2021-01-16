@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+var cors = require('cors')
 const env = require('dotenv');
+const path = require('path');
 
 
 const app = express();
@@ -8,8 +10,6 @@ const app = express();
 env.config();
 // Routes
 const authRoute = require('./routes/auth');
-const landingPageRoute = require('./routes/landingPage');
-
 
 app.set('PORT', process.env.PORT || 8000);
 
@@ -25,10 +25,15 @@ mongoose.connect(process.env.DB_CONNECTION_URL, {
 
 //Middlewares
 
+app.use(cors());
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+
 app.use('/user', authRoute);
-app.use('/', landingPageRoute);
+
+app.get('*', (req, res) => res.sendFile(path.resolve('client', 'build', 'index.html')));
 
 
 app.listen(app.get('PORT'), () => {

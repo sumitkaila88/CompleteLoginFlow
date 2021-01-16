@@ -1,21 +1,18 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {useEffect} from 'react';
 import { Paper, withStyles, Grid, Typography } from '@material-ui/core';
 const styles = theme => ({
     margin: {
-        margin: theme.spacing.unit * 2,
+        margin: theme.spacing(2),
     },
     padding: {
-        padding: theme.spacing.unit*5,
+        padding: theme.spacing(5),
         maxWidth: '640px',
         margin: '5% auto'
     }
 });
 
-class Login extends React.Component {
-    render() {
-        const { classes } = this.props;
+const Homepage = props => {
+    const { classes } = props;
         return (
             <Paper className={classes.padding}>
                 <div className={classes.margin}>
@@ -24,11 +21,9 @@ class Login extends React.Component {
                             Welcome! Your Authentication is confirmed.
                         </Typography>
                     </Grid>
-                    
                 </div>
             </Paper>
         );
-    }
 }
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(Homepage);
