@@ -32,7 +32,7 @@ router.post('/login', async(req, res) => {
     const { error } = loginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const existingUser = await User.findOne({ email: req.body.email });
+    let existingUser = await User.findOne({ email: req.body.email });
     if (!existingUser) return res.status(400).send(`Email doesn't exist, try to register`);
 
     const validPass = await bcrypt.compare(req.body.password, existingUser.password);
@@ -40,13 +40,13 @@ router.post('/login', async(req, res) => {
     if (!validPass) return res.status(400).send('Invalid Password');
 
     const token = jwt.sign({ _id: existingUser._id },
-        process.env.AUTHORIZATION_TOKEN, {
-            expiresIn: 300,
-        });
+    process.env.AUTHORIZATION_TOKEN, {
+        expiresIn: 300,
+    });
+    res.header('x-access-token', token);
+    res.header('Access-Control-Expose-Headers', "x-access-token");
 
-    res.header('x-access-token', token).send(token);
-
-    res.send('Logged In Successfully')
+    res.status('200').send(existingUser)
 
 });
 
